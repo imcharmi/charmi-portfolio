@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Charmi Rokadia — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #0C0C0C;
+  --bg2:    #111111;
+  --bg3:    #161616;
+  --gold:   #C8A96E;
+  --gold2:  #E2C896;
+  --gold-dim: rgba(200,169,110,0.12);
+  --white:  #F2EDE6;
+  --muted:  #7A7468;
+  --muted2: #4A4640;
+  --line:   rgba(200,169,110,0.15);
+  --serif:  'Playfair Display', Georgia, serif;
+  --sans:   'Outfit', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 72px;
+  background: rgba(12,12,12,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.nav-logo span { color: var(--gold); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  padding: 10px 28px;
+  border: 1px solid var(--gold);
+  color: var(--gold) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
+
+/* ── AVAILABILITY BADGE ── */
+.avail-badge {
+  position: fixed;
+  bottom: 36px; right: 36px;
+  z-index: 100;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+.avail-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 72px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--serif);
+  font-size: 28vw;
+  font-weight: 900;
+  color: rgba(200,169,110,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: rise 0.8s ease forwards 0.3s;
+}
+
+.hero-tag::before { display: none; }
+
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(64px, 10vw, 140px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: rise 0.9s ease forwards 0.5s;
+}
+
+.hero-headline .line1 {
+  display: block;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.42em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero-headline .line2 {
+  display: block;
+  color: var(--white);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.hero-headline .line3 {
+  display: block;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: rise 0.9s ease forwards 0.7s;
+}
+
+.hero-desc {
+  max-width: 480px;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.hero-desc strong {
+  color: var(--white);
+  font-weight: 400;
+}
+
+.hero-actions { display: flex; gap: 16px; align-items: center; flex-shrink: 0; }
+
+.btn-gold {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-block;
+  padding: 15px 40px;
+  border: 1px solid var(--muted2);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 18px 0;
+  background: var(--bg2);
+}
+
+.ticker-inner {
+  display: flex;
+  gap: 0;
+  animation: scroll 35s linear infinite;
+  width: max-content;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.ticker-item span {
+  color: var(--gold);
+  font-size: 14px;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── STATS ── */
+.stats-section {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-left: 1px solid var(--line);
+}
+
+.stat-cell {
+  padding: 64px 48px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+
+.stat-cell::after { display: none; }
+
+.stat-big {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-big sup {
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--gold);
+  vertical-align: super;
+}
+
+.stat-caption {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ── SECTION LAYOUT ── */
+.section-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 112px 72px;
+}
+
+.s-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.s-label::before { display: none; }
+
+.s-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 72px;
+}
+
+.s-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+/* ── WHY HIRE ME ── */
+.why-section { background: var(--bg3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+}
+
+.why-card {
+  padding: 52px 44px;
+  border-right: 1px solid var(--line);
+  position: relative;
+  transition: background 0.3s;
+}
+.why-card:last-child { border-right: none; }
+.why-card:hover { background: rgba(200,169,110,0.04); }
+
+.why-icon {
+  width: 48px; height: 48px;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-size: 20px;
+}
+
+.why-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.why-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── SKILLS ── */
+.skills-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.skill-row {
+  background: var(--bg2);
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: background 0.2s;
+}
+.skill-row:hover { background: var(--bg3); }
+
+.skill-row-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.skill-tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.sk {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  padding: 4px 12px;
+  border: 1px solid var(--muted2);
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+
+.sk:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── EXPERIENCE ── */
+.exp-timeline { position: relative; }
+
+.exp-block {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 72px;
+  padding: 64px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.exp-block:first-child { padding-top: 0; }
+
+.exp-left-col { padding-top: 4px; }
+
+.exp-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-bottom: 20px;
+}
+
+.exp-period {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.exp-co {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.exp-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  background: var(--gold-dim);
+  color: var(--gold);
+  margin-top: 8px;
+}
+
+.exp-right-col {}
+
+.exp-pos {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.exp-summary {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+.exp-achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.exp-achievements li {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #9A9088;
+  line-height: 1.65;
+}
+
+.exp-achievements li::before {
+  content: '→';
+  color: var(--gold);
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── PROJECTS ── */
+.projects-section { background: var(--bg2); border-top: 1px solid var(--line); }
+
+.project-card {
+  border: 1px solid var(--line);
+  margin-bottom: 2px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.project-card:hover { border-color: rgba(200,169,110,0.35); }
+
+.project-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 40px;
+  padding: 44px 52px;
+  cursor: pointer;
+  position: relative;
+}
+
+.project-header::after { display: none; }
+
+.project-num-tag {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.p-num {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted2);
+  letter-spacing: 0.08em;
+  font-family: var(--serif);
+}
+
+.p-type {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+}
+
+.project-title {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.project-arrow {
+  font-size: 24px;
+  color: var(--muted2);
+  transition: transform 0.3s, color 0.3s;
+  margin-top: 8px;
+}
+
+.project-card:hover .project-arrow {
+  transform: rotate(45deg);
+  color: var(--gold);
+}
+
+.project-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 44px 52px;
+}
+
+.project-about { padding-right: 52px; border-right: 1px solid var(--line); }
+.project-details { padding-left: 52px; }
+
+.pb-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.pb-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.pb-results {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pb-results li {
+  font-size: 14px;
+  font-weight: 300;
+  color: #9A9088;
+  display: flex;
+  gap: 14px;
+  line-height: 1.6;
+}
+
+.pb-results li::before {
+  content: '·';
+  color: var(--gold);
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+.pb-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stk {
+  font-size: 12px;
+  font-weight: 300;
+  padding: 6px 14px;
+  border: 1px solid var(--muted2);
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── TESTIMONIAL-STYLE QUOTE ── */
+.quote-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.quote-inner {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 100px 72px;
+}
+
+.quote-mark {
+  font-family: var(--serif);
+  font-size: 80px;
+  line-height: 0.5;
+  color: var(--gold);
+  opacity: 0.4;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.quote-text {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 36px;
+}
+
+.quote-attr {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── CONTACT ── */
+.contact-section { background: var(--bg3); border-top: 1px solid var(--line); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.contact-left {
+  padding-right: 80px;
+  border-right: 1px solid var(--line);
+}
+
+.contact-tagline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.contact-tagline em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+.contact-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 0; }
+
+.c-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: padding-left 0.25s;
+}
+.c-link:first-child { border-top: 1px solid var(--line); }
+.c-link:hover { padding-left: 12px; }
+
+.c-link-left { display: flex; flex-direction: column; gap: 3px; }
+
+.c-link-type {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.c-link-val {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.c-link-arrow {
+  color: var(--muted2);
+  font-size: 20px;
+  transition: color 0.2s, transform 0.2s;
+}
+.c-link:hover .c-link-arrow { color: var(--gold); transform: translateX(4px); }
+
+.contact-right {
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.services-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.svc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.svc-item:first-child { border-top: 1px solid var(--line); }
+.svc-item:hover { color: var(--white); }
+
+.svc-num {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--muted2);
+  flex-shrink: 0;
+  width: 24px;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
+}
+
+.footer-copy {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.footer-name {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.footer-name span { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.up { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding: 20px 36px; }
+  .hero { padding: 100px 36px 60px; }
+  .section-wrap { padding: 80px 36px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .skills-cols { grid-template-columns: 1fr; }
+  .exp-block { grid-template-columns: 1fr; gap: 24px; }
+  .project-body { grid-template-columns: 1fr; }
+  .project-about { padding-right: 0; border-right: none; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .project-details { padding-left: 0; padding-top: 32px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-left { padding-right: 0; border-right: none; padding-bottom: 60px; }
+  .contact-right { padding-left: 0; }
+  footer { padding: 24px 36px; }
+  .avail-badge { bottom: 20px; right: 20px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-card { border-right: none; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero-headline { font-size: 52px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .project-header { grid-template-columns: 1fr; }
+  .project-header::after { left: 28px; right: 28px; }
+  .project-header { padding: 32px 28px; }
+  .project-body { padding: 32px 28px; }
+  .quote-inner { padding: 72px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- AVAILABILITY BADGE -->
+<div class="avail-badge">
+  <div class="avail-dot"></div>
+  Available for projects
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Charmi <span>Rokadia</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text" aria-hidden="true">CR</div>
+  <div class="hero-tag">Full Stack Developer &amp; AI Specialist</div>
+  <h1 class="hero-headline">
+    <span class="line1">Full Stack Developer</span>
+    <span class="line2">Charmi</span>
+    <span class="line3">Rokadia.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      I design and ship <strong>production-grade web applications</strong> — from intelligent backends to polished frontends. 
+      3.5+ years delivering AI-powered platforms for enterprise clients. 
+      <strong>Available for your next project.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-gold">See My Work</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span>✦</span> React.js</div>
+    <div class="ticker-item"><span>✦</span> Node.js</div>
+    <div class="ticker-item"><span>✦</span> NestJS</div>
+    <div class="ticker-item"><span>✦</span> OpenAI API</div>
+    <div class="ticker-item"><span>✦</span> AWS</div>
+    <div class="ticker-item"><span>✦</span> MongoDB</div>
+    <div class="ticker-item"><span>✦</span> Docker</div>
+    <div class="ticker-item"><span>✦</span> MySQL</div>
+    <div class="ticker-item"><span>✦</span> TypeScript</div>
+    <div class="ticker-item"><span>✦</span> Socket.IO</div>
+    <div class="ticker-item"><span>✦</span> RabbitMQ</div>
+    <div class="ticker-item"><span>✦</span> CI/CD</div>
+    <div class="ticker-item"><span>✦</span> ClickHouse</div>
+    <div class="ticker-item"><span>✦</span> Next.js</div>
+    <div class="ticker-item"><span>✦</span> Redux</div>
+    <!-- duplicated for seamless loop -->
+    <div class="ticker-item"><span>✦</span> React.js</div>
+    <div class="ticker-item"><span>✦</span> Node.js</div>
+    <div class="ticker-item"><span>✦</span> NestJS</div>
+    <div class="ticker-item"><span>✦</span> OpenAI API</div>
+    <div class="ticker-item"><span>✦</span> AWS</div>
+    <div class="ticker-item"><span>✦</span> MongoDB</div>
+    <div class="ticker-item"><span>✦</span> Docker</div>
+    <div class="ticker-item"><span>✦</span> MySQL</div>
+    <div class="ticker-item"><span>✦</span> TypeScript</div>
+    <div class="ticker-item"><span>✦</span> Socket.IO</div>
+    <div class="ticker-item"><span>✦</span> RabbitMQ</div>
+    <div class="ticker-item"><span>✦</span> CI/CD</div>
+    <div class="ticker-item"><span>✦</span> ClickHouse</div>
+    <div class="ticker-item"><span>✦</span> Next.js</div>
+    <div class="ticker-item"><span>✦</span> Redux</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-cell reveal">
+      <div class="stat-big"><span class="count" data-target="3">0</span><sup>+</sup></div>
+      <div class="stat-caption">Years of professional<br>full-stack development</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-big"><span class="count" data-target="10">0</span><sup>+</sup></div>
+      <div class="stat-caption">Engineers led across<br>cross-functional teams</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-big"><span class="count" data-target="60">0</span><sup>%</sup></div>
+      <div class="stat-caption">Throughput improvement<br>via AI batching logic</div>
+    </div>
+    <div class="stat-cell reveal">
+      <div class="stat-big"><span>99</span><sup>%</sup></div>
+      <div class="stat-caption">Uptime maintained across<br>production deployments</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HIRE ME -->
+<section class="why-section" id="about">
+  <div class="section-wrap">
+    <div class="s-label">Why Work With Me</div>
+    <h2 class="s-title">What sets me <em>apart</em></h2>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">⚙</div>
+        <div class="why-title">I Own the Full Stack</div>
+        <div class="why-text">From database schema design to pixel-perfect UI — I deliver complete, production-ready applications. No handoff gaps, no half-finished features. You get a working product.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤖</div>
+        <div class="why-title">AI-Native Developer</div>
+        <div class="why-text">Real-world experience integrating OpenAI APIs, building intelligent automation workflows, and solving production-level challenges like rate-limiting and token optimisation.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <div class="why-title">I Deliver Results</div>
+        <div class="why-text">Not just code — measurable outcomes. 40% latency reduction. 60% throughput boost. 99.9% uptime. I architect with performance and reliability as first-class concerns.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section style="border-top: 1px solid var(--line);">
+  <div class="section-wrap">
+    <div class="s-label">Technical Skills</div>
+    <h2 class="s-title">The full <em>stack</em></h2>
+    <div class="skills-cols reveal">
+      <div class="skill-row">
+        <div class="skill-row-label">Frontend</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">React.js</span><span class="sk">Next.js</span><span class="sk">TypeScript</span><span class="sk">Redux Toolkit</span><span class="sk">Tailwind CSS</span><span class="sk">MUI</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">Backend</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">Node.js</span><span class="sk">NestJS</span><span class="sk">Express.js</span><span class="sk">REST APIs</span><span class="sk">Microservices</span><span class="sk">RabbitMQ</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">Databases</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">ClickHouse</span><span class="sk">Mongoose</span><span class="sk">Aggregation Pipelines</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">Cloud</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">AWS EC2</span><span class="sk">RDS</span><span class="sk">S3</span><span class="sk">SES / SNS</span><span class="sk">Docker</span><span class="sk">Nginx</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">AI</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">OpenAI API</span><span class="sk">GPT Workflows</span><span class="sk">Prompt Engineering</span><span class="sk">Rate Limit Optimisation</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">DevOps</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">GitHub Actions</span><span class="sk">GitLab CI/CD</span><span class="sk">PM2</span><span class="sk">Zero-downtime Deploy</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">Security</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">JWT</span><span class="sk">OAuth2</span><span class="sk">RBAC</span><span class="sk">API Rate Limiting</span><span class="sk">Middleware</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-row-label">Integrations</div>
+        <div class="skill-tags-wrap">
+          <span class="sk">Socket.IO</span><span class="sk">Payment Gateway</span><span class="sk">Google Maps API</span><span class="sk">SendGrid</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="work" style="border-top: 1px solid var(--line); background: var(--bg2);">
+  <div class="section-wrap">
+    <div class="s-label">Career</div>
+    <h2 class="s-title">Where I've <em>worked</em></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-block reveal">
+        <div class="exp-left-col">
+          <div class="exp-dot"></div>
+          <div class="exp-period">Oct 2025 — Present</div>
+          <div class="exp-co">PetPooja</div>
+          <div class="exp-tag">Current</div>
+        </div>
+        <div class="exp-right-col">
+          <h3 class="exp-pos">Full Stack Developer</h3>
+          <p class="exp-summary">Enterprise-grade restaurant management platform serving lakhs of outlets and franchise brands across India. Building across backend services, analytics dashboards, and cloud infrastructure.</p>
+          <ul class="exp-achievements">
+            <li>Designed end-to-end franchise royalty generation engine — calculating payouts from configurable contracts and live sales data, eliminating all manual errors</li>
+            <li>Engineered custom domain email service using AWS SES &amp; SNS, enabling brands to send statements from their own verified domain</li>
+            <li>Integrated payment gateway with webhook listeners and auto-retry logic — payment failure rate reduced by 40%</li>
+            <li>Built AI recommendation engine via OpenAI API that analyses outlet KPIs and surfaces actionable growth decisions in real time</li>
+            <li>Optimised high-volume queries with ClickHouse columnar storage — dashboard load times reduced by 50%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-block reveal">
+        <div class="exp-left-col">
+          <div class="exp-dot"></div>
+          <div class="exp-period">Jan 2023 — Sep 2025</div>
+          <div class="exp-co">Ordex Technology Solution</div>
+        </div>
+        <div class="exp-right-col">
+          <h3 class="exp-pos">Full Stack Developer</h3>
+          <p class="exp-summary">Architected and delivered full-stack AI-enabled SaaS applications. Led engineering teams, mentored junior developers, and drove architectural decisions across multiple Agile sprints.</p>
+          <ul class="exp-achievements">
+            <li>Led a 10+ member cross-functional team from concept to production on mission-critical enterprise platforms</li>
+            <li>Integrated OpenAI GPT APIs with dynamic token-based pipelines — content throughput improved by 60%</li>
+            <li>Automated CI/CD via GitHub Actions and GitLab with zero-downtime release strategies on AWS EC2 and RDS</li>
+            <li>Built microservices and async pipelines using RabbitMQ, AWS S3, and Docker for high-load reliability</li>
+            <li>Resolved production 429 rate-limiting with concurrency throttling and standardised batching logic</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-wrap">
+    <div class="s-label">Selected Work</div>
+    <h2 class="s-title">Projects I've <em>shipped</em></h2>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div>
+          <div class="project-num-tag">
+            <span class="p-num">01</span>
+            <span class="p-type">AI Platform · Law Enforcement</span>
+          </div>
+          <h3 class="project-title">BadgeSix</h3>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-about">
+          <div class="pb-label">Overview</div>
+          <p class="pb-text">Policy management platform built for U.S. law enforcement agencies. Led system architecture and a 10+ member cross-functional team end-to-end, from design to production deployment.</p>
+          <div class="pb-label">Results</div>
+          <ul class="pb-results">
+            <li>60% throughput improvement via OpenAI batching logic</li>
+            <li>Async PDF pipeline with RabbitMQ + AWS S3 for high-load reliability</li>
+            <li>Real-time collaborative dashboards with multi-stage approval workflows</li>
+            <li>Production 429 rate-limiting resolved — zero downtime post-fix</li>
+          </ul>
+        </div>
+        <div class="project-details">
+          <div class="pb-label">Tech Stack</div>
+          <div class="pb-stack-list">
+            <span class="stk">React</span><span class="stk">NestJS</span><span class="stk">MongoDB</span><span class="stk">OpenAI API</span><span class="stk">RabbitMQ</span><span class="stk">Socket.IO</span><span class="stk">JWT</span><span class="stk">AWS S3</span><span class="stk">Docker</span><span class="stk">GitLab CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div>
+          <div class="project-num-tag">
+            <span class="p-num">02</span>
+            <span class="p-type">Restaurant Tech · Finance</span>
+          </div>
+          <h3 class="project-title">Franchise Royalty Management</h3>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-about">
+          <div class="pb-label">Overview</div>
+          <p class="pb-text">End-to-end royalty management system for restaurant franchise brands — automating payout calculations, payment collection, and financial communications at scale across lakhs of outlets.</p>
+          <div class="pb-label">Results</div>
+          <ul class="pb-results">
+            <li>Royalty engine calculates franchise payouts from configurable contract terms and live outlet sales</li>
+            <li>Self-hosted transactional email via AWS SES — brands send from their own verified domain</li>
+            <li>Payment gateway with webhook listeners and auto-retry — failures reduced by 40%</li>
+            <li>Normalised MySQL schema with full audit trail for dispute resolution</li>
+          </ul>
+        </div>
+        <div class="project-details">
+          <div class="pb-label">Tech Stack</div>
+          <div class="pb-stack-list">
+            <span class="stk">Node.js</span><span class="stk">Express.js</span><span class="stk">React.js</span><span class="stk">MySQL</span><span class="stk">AWS SES</span><span class="stk">AWS SNS</span><span class="stk">Payment Gateway</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div>
+          <div class="project-num-tag">
+            <span class="p-num">03</span>
+            <span class="p-type">Restaurant Tech · CRM</span>
+          </div>
+          <h3 class="project-title">PetPooja Outlet CRM</h3>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-about">
+          <div class="pb-label">Overview</div>
+          <p class="pb-text">Full-stack CRM for franchise owners and outlet managers — featuring AI-powered recommendations, sales performance dashboards, and ad campaign management with ROI tracking.</p>
+          <div class="pb-label">Results</div>
+          <ul class="pb-results">
+            <li>AI recommendation engine analyses KPIs and surfaces actionable next steps in real time</li>
+            <li>ClickHouse + MongoDB pipelines reduced dashboard load times by 50%</li>
+            <li>Multi-tier RBAC across owner, manager, and staff roles</li>
+            <li>Reusable React component library with mobile-first responsive design</li>
+          </ul>
+        </div>
+        <div class="project-details">
+          <div class="pb-label">Tech Stack</div>
+          <div class="pb-stack-list">
+            <span class="stk">React.js</span><span class="stk">Node.js</span><span class="stk">Express.js</span><span class="stk">MongoDB</span><span class="stk">ClickHouse</span><span class="stk">OpenAI API</span><span class="stk">JWT</span><span class="stk">RBAC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div>
+          <div class="project-num-tag">
+            <span class="p-num">04</span>
+            <span class="p-type">Enterprise SaaS · Logistics</span>
+          </div>
+          <h3 class="project-title">ETS — Transport Management</h3>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-about">
+          <div class="pb-label">Overview</div>
+          <p class="pb-text">Scalable logistics platform digitising multi-department operations — real-time tracking, scheduling automation, and compliance-focused approval workflows. Led 10+ engineers from planning to production.</p>
+          <div class="pb-label">Results</div>
+          <ul class="pb-results">
+            <li>SQL schema redesign and compound indexing reduced query latency by 40%</li>
+            <li>Google Maps API for real-time route tracking and dynamic dispatch</li>
+            <li>Containerised on AWS EC2 + RDS with Docker — 99.9% uptime maintained</li>
+          </ul>
+        </div>
+        <div class="project-details">
+          <div class="pb-label">Tech Stack</div>
+          <div class="pb-stack-list">
+            <span class="stk">React.js</span><span class="stk">Express.js</span><span class="stk">MySQL</span><span class="stk">AWS EC2/RDS</span><span class="stk">Google Maps API</span><span class="stk">Docker</span><span class="stk">SendGrid</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header">
+        <div>
+          <div class="project-num-tag">
+            <span class="p-num">05</span>
+            <span class="p-type">E-Commerce · Donations</span>
+          </div>
+          <h3 class="project-title">Scouts Platform</h3>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-about">
+          <div class="pb-label">Overview</div>
+          <p class="pb-text">Donation and e-commerce platform with real-time transactions, a badge tracking engine that calculates user eligibility from purchase and donation activity, and secure role-based access control.</p>
+          <div class="pb-label">Results</div>
+          <ul class="pb-results">
+            <li>Badge engine dynamically calculates user eligibility from transaction data</li>
+            <li>Secure REST APIs with JWT and RBAC for real-time transactions</li>
+            <li>Optimised Mongoose schemas and performance-tuned MongoDB queries</li>
+          </ul>
+        </div>
+        <div class="project-details">
+          <div class="pb-label">Tech Stack</div>
+          <div class="pb-stack-list">
+            <span class="stk">React.js</span><span class="stk">Node.js</span><span class="stk">Express.js</span><span class="stk">MongoDB</span><span class="stk">JWT</span><span class="stk">AWS S3</span><span class="stk">Mongoose</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">I don't just write code — I build systems that solve real problems, scale under pressure, and keep running when it matters most.</p>
+    <div class="quote-attr">Charmi Rokadia · Full Stack Developer</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-wrap">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h2 class="contact-tagline">Ready to build<br>something <em>great?</em></h2>
+        <p class="contact-sub">Whether it's an MVP, an enterprise platform, or an AI-powered tool — I bring full ownership, clean architecture, and a track record of shipping products that perform.</p>
+        <div class="contact-links">
+          <a href="mailto:charmirokadia26@gmail.com" class="c-link">
+            <div class="c-link-left">
+              <span class="c-link-type">Email</span>
+              <span class="c-link-val">charmirokadia26@gmail.com</span>
+            </div>
+            <span class="c-link-arrow">→</span>
+          </a>
+          <a href="tel:+919726640661" class="c-link">
+            <div class="c-link-left">
+              <span class="c-link-type">Phone</span>
+              <span class="c-link-val">+91 97266 40661</span>
+            </div>
+            <span class="c-link-arrow">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/rokadiya-charmi-3257a0211/" target="_blank" class="c-link">
+            <div class="c-link-left">
+              <span class="c-link-type">LinkedIn</span>
+              <span class="c-link-val">rokadiya-charmi</span>
+            </div>
+            <span class="c-link-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="services-title">What I can build for you</div>
+        <div>
+          <div class="svc-item"><span class="svc-num">01</span>Full-stack web application development</div>
+          <div class="svc-item"><span class="svc-num">02</span>AI workflow &amp; OpenAI API integrations</div>
+          <div class="svc-item"><span class="svc-num">03</span>REST API design &amp; backend architecture</div>
+          <div class="svc-item"><span class="svc-num">04</span>Real-time systems with Socket.IO</div>
+          <div class="svc-item"><span class="svc-num">05</span>AWS cloud deployments &amp; CI/CD pipelines</div>
+          <div class="svc-item"><span class="svc-num">06</span>Database design &amp; query optimisation</div>
+          <div class="svc-item"><span class="svc-num">07</span>Technical leadership &amp; code review</div>
+          <div class="svc-item"><span class="svc-num">08</span>Performance audits &amp; system refactoring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Charmi Rokadia — Ahmedabad, Gujarat</span>
+  <span class="footer-name">Charmi <span>.</span></span>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('up'), i * 120);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('.count');
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    const duration = 1400;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target; clearInterval(timer); }
+      else el.textContent = Math.floor(current);
+    }, 16);
+    countObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => countObserver.observe(el));
+
+// Active nav
+const navAs = document.querySelectorAll('.nav-links a[href^="#"]');
+const secs = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+  navAs.forEach(a => {
+    const isActive = a.getAttribute('href') === '#' + cur;
+    if (!a.classList.contains('nav-cta')) a.style.color = isActive ? '#F2EDE6' : '';
+  });
+});
+</script>
+</body>
+</html>
